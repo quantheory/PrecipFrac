@@ -1,0 +1,93 @@
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]
+\documentclass[12pt]{article}[2007/10/19]
+
+\usepackage{cool}[2006/12/29]
+
+\usepackage[utf8]{inputenc}[2008/03/30]
+\usepackage[T1]{fontenc}[2005/09/27]
+\usepackage[letterpaper,margin=1in]{geometry}[2010/09/12]
+\usepackage{indentfirst}[1995/11/23]
+
+\usepackage{enumitem}[2011/09/28]
+
+\usepackage{amsmath}[2013/01/14]
+\usepackage{amssymb}[2013/01/14]
+\usepackage{textcomp}[2017/04/05]
+
+\usepackage{graphicx}[1999/02/16]
+
+\usepackage[squaren]{SIunits}[2007/12/02]
+
+\usepackage{listings}[2015/06/04]
+\usepackage[scaled=0.85]{beramono}[2004/01/31]
+
+\usepackage{xcolor}[2016/05/11]
+
+\usepackage[backend=biber,
+  citestyle=authoryear,
+  maxbibnames=5]{biblatex}[2014/06/25]
+\addbibresource{PrecipFrac.bib}
+
+\renewcommand\rmdefault{put}
+\renewcommand\familydefault\rmdefault
+
+\frenchspacing
+
+\title{Precipitation Fraction}
+\author{Sean Patrick Santos}
+
+\DeclareMathOperator\rank{rank}
+
+% Don't use ``ln'' for log base e, and show parentheses.
+\Style{LogBaseESymb=log,LogParen=p}
+
+% Default to monospace code, in fortran.
+\lstset{language=[08]Fortran,basicstyle=\ttfamily}
+
+\begin{document}
+
+\maketitle
+
+\section{Precipitation Fraction Basics}
+
+Consider a partition of a grid cell $k$ into two parts, a high-precipitation
+region $R_{P,k}$, and a low-precipitation area $R_{N,k}$. Consider also that the
+grid cell is divided into a high-cloud region $R_{C,k}$, and a low-cloud region
+$R_{E,k}$. $R_{P,k}$ is chosen to be the region with the highest concentration
+of precipitation, containing a fraction $r_p$ of the precipitation mass, while
+$1-r_p$ is in $R_{N,k}$. Similarly, the cloud fraction $R_{C,k}$ contains a
+fraction $r_c$ of cloud mass, while $1-r_c$ is in $R_{E,k}$. The fractional area
+of $R_{P,k}$ and $R_{C,k}$ are $f_p$ and $f_c$, respectively. In the total
+absence of precipitation or cloud mass, these regions are undefined, but it is
+convenient to consider $f_p$ to be zero if there is no precipitation, and
+similarly for $f_c$.
+
+Now consider a grid cell which initially has no precipitation, but does have
+cloud. Within the grid cell, there will be a cloud mass mixing ratio in the
+vicinity of any given point, $q_c$, and a rate of change of cloud mass mixing
+ratio, $\dot{q}_c$. The probability density function of these variables within
+the grid cell can be labeled as $D(q_c, \dot{q}_c)$. The time evolution of
+this function is then:
+
+\begin{align}
+  \frac{d}{d t} D(q_c, \dot{q}_c) &= \dot{q}_c \frac{\partial}{\partial q_c}
+  D(q_c, \dot{q}_c) + \ddot{q}_c \frac{\partial}{\partial \dot{q}_c} D(q_c,
+  \dot{q_c})
+\end{align}
+
+We can also look at the PDF of $q_c$ alone, which we can label $D_c$:
+
+\begin{align}
+  D_c(q_c) &= \int_{-\infty}^\infty D(q_c, \dot{q}_c) d\dot{q}_c \\ \frac{d
+    D_c(q_c)}{dt} &= \int_{-\infty}^\infty \dot{q}_c \frac{\partial}{\partial q_c} D(q_c, \dot{q}_c)
+  d\dot{q}_c
+\end{align}
+
+A variable of interest is the mean mass mixing ratio, $\bar{q}_c$:
+
+\begin{align}
+  \bar{q}_c &= \int_0^\infty q_c D_c(q_c) dq_c \\
+  \frac{d \bar{q}_c}{dt} &= 
+\end{align}
+
+\end{document}
